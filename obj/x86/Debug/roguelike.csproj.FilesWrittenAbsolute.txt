@@ -1,0 +1,8 @@
+/Users/thornz/Projects/roguelike/roguelike/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/thornz/Projects/roguelike/roguelike/bin/Debug/roguelike.exe.mdb
+/Users/thornz/Projects/roguelike/roguelike/bin/Debug/roguelike.exe
+/Users/thornz/Projects/roguelike/roguelike/obj/x86/Debug/roguelike.exe
+/Users/thornz/Projects/roguelike/roguelike/obj/x86/Debug/roguelike.exe.mdb
+/Users/thornz/Projects/roguelike/roguelike/bin/Debug/OpenTK.dll
+/Users/thornz/Projects/roguelike/roguelike/bin/Debug/RLNET.dll
+/Users/thornz/Projects/roguelike/roguelike/bin/Debug/RogueSharp.dll

@@ -12,11 +12,14 @@ namespace roguelike
 
 		public int x{ get; set; }
 		public int y{ get; set;}
+		public int z{ get; set;}
+
 		public RLColor Color { get; set; }
 
-		public Chest (int x, int y){
+		public Chest (int x, int y, int z){
 			this.x = x;
 			this.y = y;
+			this.z = z;
 			this.Symbol = 'C';
 			this.Color = RLColor.Yellow;
 		}
@@ -25,9 +28,9 @@ namespace roguelike
 			opened = true;
 			Symbol = 'O';
 		}
+
 		public void Draw(RLConsole console, IMap map){
 			console.Set (x, y, Color, null, Symbol);
-
 		}
 }
 }

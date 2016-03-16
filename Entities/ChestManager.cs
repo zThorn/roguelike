@@ -1,5 +1,7 @@
 ﻿using System;
 using C5;
+using RogueSharp;
+using RLNET;
 
 namespace roguelike
 {
@@ -34,10 +36,11 @@ namespace roguelike
 		private void openChest(){
 		}
 
-		public void drawChests(){
+		public void OnRootConsoleRender(object sender, UpdateEventArgs e ){
+			IMap currentIMap = MainClass.getLevelManager ().getIMap (0);
 			foreach (var Chest in chests) {
-				if (em.screenReference.getIMap ().GetCell (Chest.x, Chest.y).IsInFov || em.screenReference.getIMap ().GetCell (Chest.x, Chest.y).IsExplored) {
-					Chest.Draw (em.screenReference.getConsole(), em.screenReference.getIMap ());
+				if (currentIMap.GetCell (Chest.x, Chest.y).IsInFov || currentIMap.GetCell (Chest.x, Chest.y).IsExplored) {
+					Chest.Draw (MainClass.getConsole(), currentIMap);
 				}
 			}
 		}

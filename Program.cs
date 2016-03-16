@@ -15,92 +15,51 @@ namespace roguelike
 		private static Player player;
 		private static ChestManager chestManager;
 		private static Screen screen;
+		private static LevelManager lm;
+
 
 		public static void Main (string[] args){
 			screen = new Screen ();
-			screen.generate();
-			EntityManager iGen = new EntityManager (screen);
-			chestManager = new ChestManager (iGen, 6);
+			lm = new LevelManager ();
+			lm.generate ();
+			EntityManager em = new EntityManager (screen);
+			chestManager = new ChestManager (em, 6);
+
+
+
+
+
 			player = new Player (25,25);
 			console = screen.getConsole();
-			console.Render += OnRootConsoleRender;
-			console.Update += OnRootConsoleUpdate;
+			console.Render += screen.beginRootConsoleRender;
+
+			console.Render += screen.OnRootConsoleRender;
+			console.Render += chestManager.OnRootConsoleRender;
+			console.Render += player.OnRootConsoleRender;
+
+			console.Render += screen.endRootConsoleRender;
+
+			console.Update += player.OnRootConsoleUpdate;
 
 			console.Run ();
 		
 		}
 
-		private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e){
-			RLKeyPress keypress = console.Keyboard.GetKeyPress ();
-
-			if (keypress != null) {
-				if (keypress.Key == RLKey.W) {
-					if (screen.getIMap ().GetCell (player.x, player.y - 1).IsWalkable)
-						player.y -= 1;
-				
-					}
-				if (keypress.Key == RLKey.S) {
-					if (screen.getIMap ().GetCell (player.x, player.y + 1).IsWalkable)
-						player.y += 1;
-
-				}
-				if (keypress.Key == RLKey.A) {
-					if (screen.getIMap ().GetCell (player.x - 1, player.y).IsWalkable)
-						player.x -= 1;
-
-				}
-				if (keypress.Key == RLKey.D) {
-					if (screen.getIMap ().GetCell (player.x + 1, player.y).IsWalkable)
-						player.x += 1;
-
-				}
-				if (keypress.Key == RLKey.E) {
-					Chest chest = chestManager.isChestInCell (player.x, player.y);
-					if (chest != null) {
-						chest.openChest ();
-					}
-				}
-			}
+		//I hate all of these static getters... TODO refactor this garbage away.
+		public static RLRootConsole getConsole(){
+			return console;
 		}
 
-		private static void OnRootConsoleRender(object sender, UpdateEventArgs e){
-			console.Clear ();
-			screen.getIMap ().ComputeFov (player.x, player.y, 60, true);
+		public static Screen getScreen(){
+			return screen;
+		}
 
-			foreach ( var cell in screen.getIMap().GetAllCells() )
-			{
-				// When a Cell is in the field-of-view set it to a brighter color
-				if ( cell.IsInFov )
-				{
-					screen.getIMap().SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true );
-					if ( cell.IsWalkable )
-					{
-						 
-						console.Set( cell.X, cell.Y, RLColor.Gray, null, '.' );
-					}
-					else
-					{
-						console.Set( cell.X, cell.Y, RLColor.LightGray, null, '#' );
-					}
-				}
-				// If the Cell is not in the field-of-view but has been explored set it darker
-				else if ( cell.IsExplored )
-				{
-					if ( cell.IsWalkable )
-					{
-						console.Set( cell.X, cell.Y, new RLColor( 30, 30, 30 ), null, '.' );
-					}
-					else
-					{
-						console.Set( cell.X, cell.Y, RLColor.Gray, null, '#' );
-					}
-				}
-			}
+		public static LevelManager getLevelManager(){
+			return lm;
+		}
 
-			chestManager.drawChests ();
-
-			console.Set( player.x, player.y, RLColor.LightGreen, null, '@' );
-			console.Draw ();
+		public static ChestManager getChestManager(){
+			return chestManager;
 		}
 
 	}

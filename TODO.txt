@@ -1,0 +1,7 @@
+﻿TODO:
+	I should probably create a generic entity class to abstract away generation from the entitymanager.
+	EntityManager should only really be returning references to the underlying ds of the managed entities.
+	EntityManager should handle deletion & creation of generic entities as well.  
+	I need to figure out how I want to handle transitioning between floors as well.  Currently Ladders contains a Z integer which
+	could handle that, but im not entirely certain I want to add a z axis across all current entities.  This would require refactoring 
+	every entity that currently exists.

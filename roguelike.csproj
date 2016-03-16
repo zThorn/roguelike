@@ -62,6 +62,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="terminal8x8.png" />
+    <None Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

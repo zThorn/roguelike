@@ -6,7 +6,11 @@ namespace roguelike
 	public struct Level{
 		public static readonly int screenWidth = 50;
 		public static readonly int screenHeight = 50;
-		public static IMap map;
+		public IMap map;
+
+		public Level(IMap map){
+			this.map = map;
+		}
 	}
 }
 

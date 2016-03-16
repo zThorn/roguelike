@@ -24,18 +24,17 @@ namespace roguelike
 			lm.generate ();
 			EntityManager em = new EntityManager (screen);
 			chestManager = new ChestManager (em, 6);
-
-
-
-
-
+		 	
 			player = new Player (25,25);
+			em.generateLadders (2);
 			console = screen.getConsole();
 			console.Render += screen.beginRootConsoleRender;
 
 			console.Render += screen.OnRootConsoleRender;
-			console.Render += chestManager.OnRootConsoleRender;
 			console.Render += player.OnRootConsoleRender;
+			console.Render += chestManager.OnRootConsoleRender;
+
+			console.Render += em.OnRootConsoleRender;
 
 			console.Render += screen.endRootConsoleRender;
 

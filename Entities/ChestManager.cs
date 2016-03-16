@@ -5,19 +5,19 @@ using RLNET;
 
 namespace roguelike
 {
+	//TODO: This should be removed.  EntityManager should have a generic "Get Cell Occupants" method, and should have a generic renderer
 	public class ChestManager
 	{
 		private ArrayList<Chest> chests;
-		private EntityManager em;
 		//TODO: Leaving this blank for now...there shouldnt ever be a default instance 
 		public ChestManager (EntityManager iGen){
 			
 		}
 
-		public ChestManager(EntityManager iGen,  int chestNumber){
+		public ChestManager(EntityManager em,  int chestNumber){
 			chests = new ArrayList<Chest> ();
-			chests.AddAll(iGen.generateChests (6));
-			this.em = iGen;
+		
+			chests.AddAll(em.generateChests (6));
 		}
 
 		public void addChest(Chest chest){
@@ -37,10 +37,10 @@ namespace roguelike
 		}
 
 		public void OnRootConsoleRender(object sender, UpdateEventArgs e ){
-			IMap currentIMap = MainClass.getLevelManager ().getIMap (0);
-			foreach (var Chest in chests) {
-				if (currentIMap.GetCell (Chest.x, Chest.y).IsInFov || currentIMap.GetCell (Chest.x, Chest.y).IsExplored) {
-					Chest.Draw (MainClass.getConsole(), currentIMap);
+			IMap currentIMap = MainClass.getLevelManager ().getIMap ();
+			foreach (var chest in chests) {
+				if (chest.z == MainClass.getLevelManager().currentFloor && currentIMap.GetCell (chest.x, chest.y).IsInFov || currentIMap.GetCell (chest.x, chest.y).IsExplored) {
+					chest.Draw (MainClass.getConsole(), currentIMap);
 				}
 			}
 		}

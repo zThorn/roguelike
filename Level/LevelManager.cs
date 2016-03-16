@@ -10,10 +10,11 @@ namespace roguelike{
 		private ArrayList<Level> levels;
 		private int floorsToGenerate;
 		public int currentFloor;
-
+		public int maxFloors;
 		public LevelManager (){
 			currentFloor = 0;
-			floorsToGenerate = 5;
+			floorsToGenerate = 1;
+			maxFloors = floorsToGenerate;
 			levels = new ArrayList<Level> ();
 		}
 
@@ -27,6 +28,10 @@ namespace roguelike{
 		}
 
 		public IMap getIMap(int i){ return levels[i].map; }
+
+		//getImap with no parameters will return the IMap for currentFloor
+		public IMap getIMap(){ return levels[currentFloor].map; }
+
 
 	}
 }

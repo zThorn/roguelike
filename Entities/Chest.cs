@@ -22,6 +22,8 @@ namespace roguelike
 			this.z = z;
 			this.Symbol = 'C';
 			this.Color = RLColor.Yellow;
+			System.Console.WriteLine ("x: " + x + " y: " + y);
+
 		}
 
 		public void openChest(){
@@ -31,6 +33,8 @@ namespace roguelike
 
 		public void Draw(RLConsole console, IMap map){
 			console.Set (x, y, Color, null, Symbol);
+			MainClass.getConsole().Set( x, y, Color, null, Symbol );
+
 		}
 }
 }
